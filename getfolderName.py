@@ -3,7 +3,7 @@
 # @Time    : 2017/10/9 21:44
 # @Author  : Wayne
 # @Site    : 
-# @File    : GetfolderName.py
+# @File    : getfolderName.py
 # @Software: PyCharm
 
 import glob

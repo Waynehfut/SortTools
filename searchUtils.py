@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import re
 
-import DBConnect
+import dbConnect
 import logger
 def parse_str(str_sql):
     '''
@@ -27,7 +27,7 @@ def search_handler(search_str):
     :return: 搜索后的序列
     '''
     search_str = parse_str(search_str)
-    dbHandler = DBConnect.DBConnect()
+    dbHandler = dbConnect.DBConnect()
     search_array = dbHandler.select_sql(search_str)
     return search_array
 

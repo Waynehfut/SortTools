@@ -3,7 +3,7 @@
 # @Time    : 2017/10/9 2121asd:06
 # @Author  : Wayne
 # @Site    : 
-# @File    : DBConnect.py
+# @File    : dbConnect.py
 # @Software: PyCharm
 import pymysql.cursors
 import logger

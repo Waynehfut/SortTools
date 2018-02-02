@@ -5,7 +5,7 @@ import fileManager as filemgr
 import logger as logger
 import searchUtils as seacher
 import time
-import DBConnect as dbHandler
+import dbConnect as dbHandler
 import sys
 
 try:
