@@ -2,8 +2,9 @@
 
 Code by wayne,Powered by PYQT4
 
-run `python mainWin` for specific env or run `python cmdRun.py` for default env
-package require:`pyqt4`,`pymysql`
+Run `python mainWin` for specific env or run `python cmdRun.py` for default env
+
+Package require:`pyqt4`,`pymysql`
     
 
 - [MySite](http://waynehfut.github.io) 
