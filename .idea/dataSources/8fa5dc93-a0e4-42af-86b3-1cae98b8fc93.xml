@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="test@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="test">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <table id="6" parent="2" name="wjlistnew"/>
+    <column id="7" parent="6" name="M_ID">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="8" parent="6" name="检查号">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="9" parent="6" name="检查类型">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="10" parent="6" name="患者类型">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="11" parent="6" name="姓名">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="12" parent="6" name="年龄">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="13" parent="6" name="性别">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="14" parent="6" name="门诊号">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="15" parent="6" name="住院号">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="16" parent="6" name="检查日期">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="17" parent="6" name="申请科室">
+      <Position>11</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="18" parent="6" name="诊断">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="19" parent="6" name="所见">
+      <Position>13</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

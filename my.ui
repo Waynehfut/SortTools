@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>388</width>
+    <height>180</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>388</width>
+    <height>180</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>388</width>
+    <height>180</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>321</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QLabel" name="keyWordsLabel_6">
+       <property name="text">
+        <string>key words</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="destPath_5"/>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QSplitter" name="splitter_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QLabel" name="keyWordsLabel_4">
+       <property name="text">
+        <string>Work path</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="destPath_3"/>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QLabel" name="keyWordsLabel_2">
+       <property name="text">
+        <string>db_ip</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="destPath"/>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QSplitter" name="splitter_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QLabel" name="keyWordsLabel_3">
+       <property name="text">
+        <string>db_name</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="destPath_2"/>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QSplitter" name="splitter_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QCheckBox" name="isLog">
+       <property name="text">
+        <string>isLog</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="isReport">
+       <property name="text">
+        <string>isReport</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="isStrict">
+       <property name="text">
+        <string>isStrict</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="searchButton">
+       <property name="text">
+        <string>Search</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
