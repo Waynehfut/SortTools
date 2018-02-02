@@ -1,7 +1,6 @@
 # SortTools
 
 Code by wayne,Powered by PYQT4
-这个是一个小的分类工具。
 
 run `python mainWin` for specific env or run `python cmdRun.py` for default env
 package require:`pyqt4`,`pymysql`
