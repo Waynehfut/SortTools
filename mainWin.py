@@ -7,7 +7,7 @@
 # @Software: PyCharm
 # -*- coding: utf-8 -*-
 
-from my import *
+from mainUI import *
 from PyQt4 import QtGui
 
 

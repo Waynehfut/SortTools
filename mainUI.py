@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'my.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
-import FileManager as filemgr
+import fileManager as filemgr
+import logger as logger
+import searchUtils as seacher
+import time
+import DBConnect as dbHandler
+import sys
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -95,52 +94,94 @@ class Ui_Dialog(object):
         self.splitter_3.setObjectName(_fromUtf8("splitter_3"))
         self.isLog = QtGui.QCheckBox(self.splitter_3)
         self.isLog.setObjectName(_fromUtf8("isLog"))
-        self.isReport = QtGui.QCheckBox(self.splitter_3)
-        self.isReport.setObjectName(_fromUtf8("isReport"))
-        self.isStrict = QtGui.QCheckBox(self.splitter_3)
-        self.isStrict.setObjectName(_fromUtf8("isStrict"))
+        self.processBar = QtGui.QProgressBar(self.splitter_3)
         self.helpButton = QtGui.QPushButton(self.splitter_3)
         self.helpButton.setObjectName(_fromUtf8("helpButton"))
         self.gridLayout.addWidget(self.splitter_3, 5, 0, 1, 1)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
         # Click connecter
-        self.searchButton.connect(self.searchButton, QtCore.SIGNAL('clicked()'), self.onsearchButtonClicked)
-        self.connectButton.connect(self.connectButton, QtCore.SIGNAL('clicked()'), self.onconnectButtonClicked)
+        self.searchButton.connect(self.searchButton, QtCore.SIGNAL('clicked()'), self.onSearchButtonClicked)
+        self.connectButton.connect(self.connectButton, QtCore.SIGNAL('clicked()'), self.onConnectButtonClicked)
         self.helpButton.connect(self.helpButton, QtCore.SIGNAL('clicked()'), self.onhelpButtonClicked)
+
+        # Checkbox connecter
+        self.isLog.connect(self.isLog, QtCore.SIGNAL('stateChanged(int)'), self.isLogChecked)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "数据检索工具", None))
+        self.dbIPAddressEdit.setText("localhost:3306")
+        self.dbNameEdit.setText("lab_db.mri.detect")
         self.keyWordsLabel.setText(_translate("Dialog", "关键词    ", None))
         self.workPathLabel.setText(_translate("Dialog", "工作目录  ", None))
+        self.workPathEdit.setText("D:\Documents\Lab\Wayne\Lab Data\Meniscus\半月板\半月板-image\me")
         self.dbIPAddressLabel.setText(_translate("Dialog", "数据库地址", None))
         self.dbNameLabel.setText(_translate("Dialog", "数据库名称", None))
         self.isLog.setText(_translate("Dialog", "日志记录", None))
-        self.isReport.setText(_translate("Dialog", "结果报告", None))
-        self.isStrict.setText(_translate("Dialog", "严格模式", None))
         self.searchButton.setText(_translate("Dialog", "检索数据", None))
         self.connectButton.setText(_translate("Dialog", "连接数据库", None))
         self.helpButton.setText(_translate("Dialog", "帮助/关于", None))
 
-    def onsearchButtonClicked(self):
+    # Search button
+    def onSearchButtonClicked(self):
         self.keyWords = self.keyWordsEdit.text()
+        self.logStatus = self.isLog.checkState()
         self.workPath = self.workPathEdit.text()
+        self.onConnectButtonClicked()
+        try:
+            filemg = filemgr.FileManager()
+            filemg.move_file_by_index(self.keyWords, self.workPath)
+            # max_counter = 0
+            # max_counter=filemg.counter
+            print("asddasd"+str(filemg.counter))
+            if filemg.counter>0:
+                self.processBar.setMinimum(0)
+                self.processBar.setMaximum(filemg.counter)
+                while filemg.counter > 0:
+                    if filemg.counter == 0:
+                        break
+                    self.processBar.setValue(filemg.counter)
+
+        except OSError:
+            logger.warning("OSError")
+            logger.exception(sys.stderr)
+            QtGui.QMessageBox.warning(self.searchButton, "错误", "找不到工作目录")
+        except Exception:
+            logger.warning("Search error")
+            logger.exception(sys.stderr)
+            QtGui.QMessageBox.warning(self.searchButton, "错误", "检索错误，表不存在或表字段不存在")
+
+    # DB connect button
+    def onConnectButtonClicked(self):
         self.dbIp = self.dbIPAddressEdit.text()
         self.dbName = self.dbNameEdit.text()
-        print(self.keyWords, '-', self.workPath, '-', self.dbIp, '-', self.dbName)
-        filemgr.FileManager.move_file_by_index(self.keyWords, self.workPath)
+        try:
+            dbHand = dbHandler.DBConnect()
+            dbHand.setUpDB(host=self.dbIp.split(":")[0], port=int(self.dbIp.split(":")[1]),
+                           dbname=self.dbName.split(".")[0], schema=self.dbName.split('.')[1],
+                           schemaTable=self.dbName.split('.')[2])
+        except Exception:
+            logger.warning("try connect " + self.dbIp + ":" + self.dbName + "error")
+            logger.exception(sys.stderr)
+            QtGui.QMessageBox.warning(self.connectButton, "错误", "连接数据库出错")
 
-    def onconnectButtonClicked(self):
-        print(1)
+    # is Log check
+    def isLogChecked(self):
+        if self.isLog.isChecked():
+            logger.stopLogging()
+            logger.startLogging()
+            logger.info("Start logging")
+        else:
+            logger.stopLogging()
+            logger.info("Stop logging")
 
+    # Help button
     def onhelpButtonClicked(self):
-        QtGui.QMessageBox.information(self.helpButton, "关于", str("以下是简单的帮助说明：\n"
-                                                                 "关键词即为我们搜索的词，支持模糊检索\n"
+        QtGui.QMessageBox.information(self.helpButton, "关于", str("关键词即为我们搜索的词，支持模糊检索\n"
                                                                  "工作目录是指检索的目录，同时会在工作目录生成分类文件\n"
                                                                  "IP地址是指数据库连接地址，默认端口为3306\n"
                                                                  "数据库是指检索的数据库，默认为mysql\n"
                                                                  "日志记录将记录每次检索的日志，保存在工作目录中\n"
-                                                                 "结果报告将记录检索的统计信息，保存在工作目录中\n"
-                                                                 "严格模式将仅检索关键词，不检索近似词\n"
                                                                  "Powered by PyQT,Code by Wayne,@Waynehfut"))
