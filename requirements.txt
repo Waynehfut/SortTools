@@ -9,7 +9,7 @@ idna==2.6
 Markdown==2.6.11
 matplotlib==2.0.2
 numpy==1.14.0
-Pillow==5.0.0
+Pillow==6.2.0
 pipreqs==0.4.9
 protobuf==3.5.1
 PyMySQL==0.7.9
